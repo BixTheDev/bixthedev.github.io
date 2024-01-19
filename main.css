@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background: #17242dff;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
+
+
+ul {
+	display: flex;
+	width: 100%;
+	position: absolute; 
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	/*background-color: rgba(0,0,0,0.3);*/
+}
+
+li {
+	float: left;
+	
+}
+
