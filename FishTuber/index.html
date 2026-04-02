@@ -1,0 +1,244 @@
+<html>
+
+<head>
+    <title>FishTuber</title>
+    <link rel="icon" type="image/x-icon" href="/fishtuber.ico">
+    <style>
+        body {
+            background: rgb(0, 255, 0);
+            color: white;
+            font-family: Arial;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* === OVERLAY CONTAINER === */
+        #vuContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 420px;
+            background: rgba(20, 20, 20, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px black;
+            transition: opacity 0.2s ease;
+        }
+
+        #fishTuber {
+            display: flex;
+            justify-content: center;
+            /* Horizontal */
+            align-items: center;
+            /* Vertical */
+            height: 100vh;
+            /* Required for vertical centering */
+        }
+
+        #vuContainer.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #meter {
+            width: 100%;
+            height: 25px;
+            background: #333;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        #level {
+            height: 100%;
+            width: 0%;
+            background: limegreen;
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        select,
+        input {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        #status {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        img.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- === YOUR APP CAN GO HERE === -->
+    <div id="fishTuber">
+        <img id="FishNoTalk" src="/FishNoTalk.png"></img>
+        <img id="FishTalk" class="hidden" src="/FishTalk.png"></img>
+    </div>
+
+    <!-- === VU OVERLAY === -->
+    <div id="vuContainer">
+        <div id="meter">
+            <div id="level"></div>
+        </div>
+
+        <div id="status">Press M to hide</div>
+
+        <div class="controls">
+            <label>Microphone</label>
+            <select id="micSelect"></select>
+
+            <label>Sensitivity</label>
+            <input type="range" id="sensitivity" min="0.01" max="0.2" step="0.005" value="0.05">
+            <span id="sensValue">0.05</span>
+        </div>
+    </div>
+
+    <script>
+        let audioContext;
+        let analyser;
+        let dataArray;
+        let source;
+        let currentStream;
+        let threshold = 0.05;
+        let peak = 0;
+
+        const container = document.getElementById("vuContainer");
+        const levelEl = document.getElementById("level");
+        const statusEl = document.getElementById("status");
+        const micSelect = document.getElementById("micSelect");
+        const sensitivitySlider = document.getElementById("sensitivity");
+        const sensValue = document.getElementById("sensValue");
+
+        const FishNoTalk = document.getElementById("FishNoTalk");
+        const FishTalk = document.getElementById("FishTalk");
+
+        /* === TOGGLE WITH M KEY === */
+        document.addEventListener("keydown", (e) => {
+            if (e.key.toLowerCase() === "m") {
+                container.classList.toggle("hidden");
+            }
+        });
+
+        /* === SENSITIVITY CONTROL === */
+        sensitivitySlider.addEventListener("input", () => {
+            threshold = parseFloat(sensitivitySlider.value);
+            sensValue.textContent = threshold.toFixed(3);
+        });
+
+        /* === GET MICROPHONES === */
+        async function getMics() {
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const mics = devices.filter(d => d.kind === "audioinput");
+
+            micSelect.innerHTML = "";
+
+            mics.forEach((mic, i) => {
+                const option = document.createElement("option");
+                option.value = mic.deviceId;
+                option.text = mic.label || `Microphone ${i + 1}`;
+                micSelect.appendChild(option);
+            });
+        }
+
+        /* === START / SWITCH MIC === */
+        async function startMic(deviceId) {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: { deviceId: deviceId ? { exact: deviceId } : undefined }
+            });
+
+            currentStream = stream;
+
+            if (!audioContext) {
+                audioContext = new AudioContext();
+            }
+
+            source = audioContext.createMediaStreamSource(stream);
+
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 2048;
+            analyser.smoothingTimeConstant = 0.85;
+
+            dataArray = new Uint8Array(analyser.fftSize);
+
+            source.connect(analyser);
+
+            update();
+        }
+
+        /* === UPDATE LOOP === */
+        function update() {
+            if (!analyser) return;
+
+            analyser.getByteTimeDomainData(dataArray);
+
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                let v = (dataArray[i] - 128) / 128;
+                sum += v * v;
+            }
+
+            let rms = Math.sqrt(sum / dataArray.length);
+            let db = 20 * Math.log10(rms);
+            if (!isFinite(db)) db = -100;
+
+            let normalized = Math.min(Math.max((db + 60) / 60, 0), 1);
+
+            peak = Math.max(normalized, peak * 0.95);
+
+            levelEl.style.width = (peak * 100) + "%";
+
+            if (peak > 0.8) levelEl.style.background = "red";
+            else if (peak > 0.5) levelEl.style.background = "orange";
+            else levelEl.style.background = "limegreen";
+
+            statusEl.textContent = rms > threshold ? "Speaking" : "Silent";
+            if (statusEl.textContent == "Speaking") {
+                FishNoTalk.classList.add("hidden");
+                FishTalk.classList.remove("hidden");
+            } else if (statusEl.textContent == "Silent") {
+                FishNoTalk.classList.remove("hidden");
+                FishTalk.classList.add("hidden");
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        /* === MIC SWITCH HANDLER === */
+        micSelect.addEventListener("change", () => {
+            startMic(micSelect.value);
+        });
+
+        /* === INIT (CLICK REQUIRED) === */
+        document.body.addEventListener("click", async () => {
+            await getMics();
+            await startMic(micSelect.value);
+            statusEl.textContent = "Running (Press M to toggle)";
+        }, { once: true });
+
+    </script>
+
+</body>
+
+</html>
