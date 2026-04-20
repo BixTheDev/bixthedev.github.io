@@ -1,5 +1,4 @@
-javascript: (function () {
-    const cords = [0, 1];
+const cords = [0, 1];
     let lastRun = 0;
     const delay = 2000;
     window.addEventListener("message", function (e) {
@@ -26,4 +25,3 @@ javascript: (function () {
         }
     });
     alert("Enabled - Press 1")
-})();
