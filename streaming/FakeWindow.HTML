@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OBS Twitch Windows</title>
+  <style>
+    @font-face {
+      font-family: EditUndo;
+      src: url(editundo.ttf);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: blue;
+    }
+
+    .topWindow{
+      position: relative;
+      height: 100vh;
+      box-sizing: border-box;
+      border: 5px solid transparent;
+      border-image: url("./Assets/PanelBG.png") 13 fill stretch;
+    }
+    .newTab{
+      background: linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(5, 25, 125, 1));
+
+      height: 25px;
+      width: 100%;
+      align-items: center;
+      display:inline-flex;
+      justify-content: flex-end;
+      
+    }
+
+    .tabIcon{
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      
+    }
+    #tabName{
+      /* transform: translateY(-50%); */
+      font-family: 'Courier New', Courier, monospace;
+      color:white;
+      margin-right: auto;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      margin-left: 10px;
+    }
+    .icon{
+      height: 50%;
+      aspect-ratio: 1 / 1;
+      margin-right: 5px;
+      /* transform: translateY(-30%); */
+
+      border: 3px solid transparent;
+      border-image: url("./Assets/PanelBG.png") 13 fill stretch;
+      display: flex;
+      align-items: center;
+    }
+    #iconSymbols{
+      height: 85%;
+      aspect-ratio: 1 / 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="topWindow">
+    <div class="newTab">
+      <!-- <img class="tabIcon" src="https://godotengine.org/assets/press/icon_color.png"></img> -->
+      
+      <span id="tabName">Bix@Godot Engine</span>
+
+      <div class="icon"><img id="iconSymbols" src="Assets/MinimizeIcon.png"></img></div>
+      <div class="icon"><img id="iconSymbols" src="Assets/MaximizeIcon.png"></img></div>
+      <div class="icon"><img id="iconSymbols" src="Assets/ExitIcon.png"></img></div>
+
+    </div>
+  </div>
+
+
+  <script>
+    const params = new URLSearchParams(window.location.search)
+
+    const tabName = params.get("name")
+    if (tabName){
+      document.getElementById("tabName").textContent = tabName
+    }
+    // console.log(`Tab Name Set: ${tabName}`)
+  </script>
+
+</body>
+</html>
