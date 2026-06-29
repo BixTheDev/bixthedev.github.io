@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <Title>Fake OS Toolbar</Title>
+
+
+</head>
+
+
+    <style>
+        body {
+            /* background-color: #008081ff; */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+
+            font-size:  small;
+            font-weight: 100;
+            font-family: PressStart
+        }
+        .toolbar {
+            width: 100vw;
+            height: 50px;
+            position: fixed;
+            bottom: 0%;
+            box-sizing: border-box;
+            border: 5px solid transparent;
+            border-image: url("./Assets/PanelBG.png") 13 fill stretch;
+
+            display:inline-flex;
+            align-items: center;
+        }
+        .startBtn {
+            width: 75px;
+            height: 85%;
+            box-sizing: border-box;
+            border: 3px solid transparent;
+            border-image: url("./Assets/PanelBG.png") 13 fill stretch;
+            position: relative;
+
+            display:inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .startText{
+            padding: 5px;
+        }
+        @font-face {
+            font-family: PressStart;
+            src: url(./Assets/PressStart.ttf);
+        }
+        .clock {
+            height: 85%;
+            box-sizing: border-box;
+            border: 3px solid transparent;
+            border-image: url("./Assets/PanelBG.png") 13 fill stretch;
+            position: relative;
+            margin-left: auto;
+            display:inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+        img{
+            height: 100%;
+            margin-right: 10px;
+        }
+    </style>
+
+<body>
+    <div class="toolbar">
+        <div class="startBtn">
+            <span class="startText"><b>Start</b></span>
+        </div>
+        <div class="clock">
+            <img src="./Assets/TimeCalendar.png">
+            <span id="timeSpan">0:00</span>
+        </div>
+    </div>
+
+    <script>
+        function updateTime(){
+            const curDate = new Date(Date.now())
+            var curTime = curDate.toLocaleString("en-us",{timezone:"America/Indiana"})
+            var splitTime = curTime.split(',')[1].split(':')
+            
+            var timeString = `${splitTime[0].trim()}:${splitTime[1]} ${splitTime[2].split(' ')[1]}`
+
+            document.getElementById("timeSpan").textContent = timeString
+        }
+        updateTime()
+        setInterval(updateTime,1000)
+    </script>
+</body>
+
+
+
+</html>
