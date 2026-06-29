@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Desktop Icon</title>
+    </head>
+
+    <style>
+        @font-face {
+            font-family: PressStart;
+            src: url(./Assets/PressStart.ttf);
+        }
+        body{
+            font-family: PressStart;
+            font-weight: bolder;
+
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+        }
+        .icon{
+            border: 2px dotted black;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        img{
+            height: 64px;
+            image-rendering: pixelated;
+            margin: 5px
+        }
+        .iconName{
+            font-size: 75%;
+        }
+    </style>
+
+    <body>
+        <div class="icon">
+            <img id="iconImg" src="./Assets/Kofi64.png"></img>
+            <span id="iconText" class="iconName">@BixTheDev</span>
+        </div>
+    </body>
+
+    <script>
+        const params = new URLSearchParams(window.location.search)
+
+        const iconText = params.get("text")
+        const iconName = params.get("icon")
+        if (iconText){
+            document.getElementById("iconText").textContent = iconText
+        }
+        if (iconName){
+            document.getElementById("iconImg").src = `./Assets/${iconName}64.png`
+            console.log("Set Icon")
+        }
+        // console.log(`Tab Name Set: ${tabName}`)
+    </script>
+
+</html>
