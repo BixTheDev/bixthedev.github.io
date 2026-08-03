@@ -14,13 +14,13 @@ body {
   overflow: hidden;
   background-color: rgb(48, 43, 79);
   user-select: none;
-  background-image: url('./images/general/BixBG.png');
+  background-image: url("./images/general/BixBG.png");
 }
 
 .panel {
   box-sizing: border-box;
   border: solid transparent;
-  border-image: url('./images/system/PanelBG.png') 13 fill stretch;
+  border-image: url("./images/system/PanelBG.png") 13 fill stretch;
 }
 
 /* Meet The Dev CSS */
@@ -34,12 +34,12 @@ body {
 }
 
 .mtd-span {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 25px;
 }
 
 .mtd-p {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 20px;
   width: 100%;
   margin-top: 5px;
