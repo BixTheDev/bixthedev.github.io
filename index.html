@@ -1,83 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<link rel = "stylesheet" href="main.css">
-<link rel = "stylesheet" href="global.css">
-	
+
 <head>
-<meta charset="utf-8">
-<title>Bix's HomePage</title>
+    <title>BixOS</title>
+    <link rel="icon" type="image/x-icon" href="/images/general/bix.ico">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="taskbar.css">
+    <link rel="stylesheet" href="Window.css">
+    <link rel="stylesheet" href="Application.css">
+
 </head>
+<style>
+
+</style>
 
 <body>
-	<ul>
-		<li>
-		<div class="button-container box">
-			<a href="index.html">
-			<button class="nav-button" >
-				<img src="images/navbar/homeicon.png" alt="Home" width="50" height="50">
-			</button>
-			</a>
-		</div>
-		</li>
-		<li>
-		<div class="button-container box">
-			<a href="aboutdev.html">
-			<button class="nav-button" >
-				<img src= "images/navbar/thedev.png" alt="Home" width="50" height="50">
-			</button>
-			</a>
-		</div>
-		</li>
-		<li>
-			<div class="button-container box">
-				<a href="abrellflap.html">
-				<button class="nav-button" >
-					<img src= "images/navbar/thedev.png" alt="Home" width="50" height="50">
-				</button>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div class="button-container box">
-				<a href="FishTuber/index.html">
-				<button class="nav-button" >
-					<img src= "images/navbar/thedev.png" alt="Home" width="50" height="50">
-				</button>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div class="button-container box">
-				<button class="nav-button GWYACheats" >
-					<img src= "images/navbar/homeicon.png" alt="Home" width="50" height="50">
-				</button>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div class="button-container box">
-				<a href="Flappy/index.html">
-				<button class="nav-button" >
-					<img src= "Flappy/index.icon.png" alt="Home" width="50" height="50">
-				</button>
-				</a>
-			</div>
-		</li>
-	</ul>
-	<!--Background Particles -->
-	<div id="particles-js"></div>
-	  <script type="text/javascript" src="systems/plugins/particles.js"></script>
-	  <script type="text/javascript" src="systems/plugins/app.js"></script>
-	<script>
-		document.getElementsByClassName("GWYACheats")[0].addEventListener("click", () => copyToClipboard("javascript:(function(){var s=document.createElement('script');s.src='https://bixthe.dev/GWYACheats.js';document.head.appendChild(s);})();"));
-		async function copyToClipboard(text) {
-		  try {
-		    await navigator.clipboard.writeText(text);
-		    console.log('Text successfully copied to clipboard');
-		  } catch (err) {
-		    console.error('Failed to copy: ', err);
-		  }
-		}
-	</script>
+    <div id="Desktop" class="Desktop">
+        
+
+
+        <div class="application" data-title="Meet The Dev" data-window-Template="MTD.Template">
+            <img class="application-img" id="iconImg" src="images/general/bix.png"></img>
+            <span id="iconText" class="application-name">Meet The Dev</span>
+        </div>
+        <div class="application" data-title="Twitch" data-window-Template="Twitch.Template">
+            <img class="application-img" id="iconImg" src="images/logos/twitch-app.png"></img>
+            <span id="iconText" class="application-name">Twitch.TV</span>
+        </div>
+        <a href="https://bixthedev.itch.io/" target="_blank">
+        <div class="application" data-title="Itch.io">
+            
+            <img class="application-img" id="iconImg" src="images/logos/itch-app.png"></img>
+            <span id="iconText" class="application-name">Itch.io Page</span>
+            
+        </div>
+        </a>
+        <div class="application" data-title="Flappy Godot" data-window-Template="FlappyGodot.Template">
+            <img class="application-img" id="iconImg" src="images/games/FlappyGodotIcon.png"></img>
+            <span id="iconText" class="application-name">Flappy Godot</span>
+        </div>
+    </div>
+
+    <div id="taskbar" class="toolbar panel">
+        <div class="startBtn panel">
+            <span class="taskbarText"><b>Start</b></span>
+        </div>
+        <div id="taskApps">
+
+        </div>
+        
+        <div class="clock panel">
+            <img class="clockImg" src="./images/system/TimeCalendar.png">
+            <span id="timeSpan">0:00</span>
+        </div>
+    </div>
+
+
+    <template id="TaskbarApp.Template">
+        <div class="minimizedApplication panel">
+            <span class="taskbarText">Meet The Dev</span>
+        </div>
+    </template>
+    <!-- Window Templates -->
+    <template id="Blank.Template">
+        <div data-max-Windows="1" class="Window panel" style="left: 75%;top: 5%;">
+            <div class="newTab">
+
+                <span id="tabName">Meet The Dev</span>
+                <div id="minimizeButton"class="icon panel"><img class="iconSymbols" src="images/system/MinimizeIcon.png"></img></div>
+                <div class="icon panel"><img class="iconSymbols" src="images/system/MaximizeIcon.png"></img></div>
+                <div id="exitButton" class="icon panel"><img class="iconSymbols" src="images/system/ExitIcon.png"></img>
+                </div>
+
+            </div>
+            <div class="WindowContent">
+            </div>
+
+        </div>
+    </template>
+    <template id="MTD.Template">
+        <div data-max-Windows="1" class="Window panel" style="left: 75%;top: 5%;width: 400px;">
+            <div class="newTab">
+
+                <span id="tabName">Meet The Dev</span>
+                <div id="minimizeButton"class="icon panel"><img class="iconSymbols" src="images/system/MinimizeIcon.png"></img></div>
+                <div class="icon panel"><img class="iconSymbols" src="images/system/MaximizeIcon.png"></img></div>
+                <div id="exitButton" class="icon panel"><img class="iconSymbols" src="images/system/ExitIcon.png"></img>
+                </div>
+
+            </div>
+            <div class="WindowContent">
+                <img class="mtd-img" src="images/general/bix.png"></img>
+                <span class="mtd-span"><b>Hi! I'm Bix</b></span>
+                <p class="mtd-p">I'm a small developer that enjoys making games and other various projects. Feel free to
+                    browse my system<i>(this website)</i> and explore my various projects!</p>
+            </div>
+
+        </div>
+    </template>
+    <template id="Twitch.Template">
+            <div data-max-Windows="1" class="Window panel" style="left: 10%;top: 10%;height: 360px;width: 640px">
+                <div class="newTab">
+
+                    <span id="tabName">Twitch.tv/bixthedev</span>
+                    <div id="minimizeButton"class="icon panel"><img class="iconSymbols" src="images/system/MinimizeIcon.png"></img></div>
+                    <div class="icon panel"><img class="iconSymbols" src="images/system/MaximizeIcon.png"></img></div>
+                    <div id="exitButton" class="icon panel"><img class="iconSymbols" src="images/system/ExitIcon.png"></img>
+                    </div>
+
+                </div>
+                <div class="WindowContent" style="width: 100%;height: 100%; justify-content: center;align-items: center;margin-top: 5px;">
+                    <!-- Add a placeholder for the Twitch embed -->
+                    <div id="twitch-embed" style="width: 100%;height: 100%;"></div>
+
+                    <!-- Load the Twitch embed script -->
+                    
+
+                    <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+                    <script type="text/javascript">
+                        new Twitch.Player("twitch-embed", {
+                        width: "100%",
+                        height: "95%",
+                        channel: "bixthedev"
+
+                    });
+                    </script>
+                </div>
+
+            </div>
+    </template>
+    <template id="FlappyGodot.Template">
+            <div data-max-Windows="1" class="Window panel" style="left: 50%;top: 5%;width: 500px;height: 790px;overflow: hidden;">
+                <div class="newTab">
+
+                    <span id="tabName">Flappy Godot</span>
+                    <div id="minimizeButton"class="icon panel"><img class="iconSymbols" src="images/system/MinimizeIcon.png"></img></div>
+                    <div class="icon panel"><img class="iconSymbols" src="images/system/MaximizeIcon.png"></img></div>
+                    <div id="exitButton" class="icon panel"><img class="iconSymbols" src="images/system/ExitIcon.png"></img>
+                    </div>
+
+                </div>
+                <div class="WindowContent" style="width: 100%;height: 100%;overflow: hidden;margin-top: 5px;"> 
+                    <iframe src="games/browser-games/flappy-godot/flappy.html" frameborder="0" style="width: 100%;height:100%;"></iframe>
+                </div>
+
+            </div>
+    </template>
+    <script src="scripts/TaskbarManager.js"></script>
+    <script src="scripts/WindowManager.js"></script>
+    <!-- This needs to load prior to opening the twitch system! -->
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
 </body>
+
 </html>
+

@@ -1,0 +1,97 @@
+/* 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: blue;
+} */
+
+.Window {
+  position: absolute;
+  border-width: 5px;
+  overflow: hidden;
+}
+
+.newTab {
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(5, 25, 125, 1));
+
+  height: 25px;
+  width: 100%;
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-end;
+
+  cursor: move;
+  user-select: none;
+}
+
+.WindowContent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#tabName {
+  /* transform: translateY(-50%); */
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  margin-right: auto;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+}
+
+.icon {
+  height: 75%;
+  aspect-ratio: 1 / 1;
+  margin-right: 5px;
+  /* transform: translateY(-30%); */
+  border-width: 3px;
+  display: flex;
+  align-items: center;
+  cursor: auto;
+  pointer-events: auto;
+}
+
+.icon:hover {
+  border-width: 4px;
+}
+
+.iconSymbols {
+  height: 85%;
+  aspect-ratio: 1 / 1;
+}
+
+.hideAnim {
+  animation: swipeFadeOut 0.2s forwards;
+}
+.unHideAnim {
+  animation: swipeFadeIn 0.2s forwards;
+}
+
+@keyframes swipeFadeOut {
+  0% {
+    opacity: 100%;
+    transform: scale(100%);
+    visibility: visible;
+  }
+  100% {
+    opacity: 0%;
+    transform: scale(0.1%);
+    visibility: hidden;
+  }
+}
+@keyframes swipeFadeIn {
+  0% {
+    opacity: 0%;
+    transform: scale(0.1%);
+    visibility: hidden;
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+    visibility: visible;
+  }
+}

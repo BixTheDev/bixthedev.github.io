@@ -1,0 +1,77 @@
+@font-face {
+  font-family: PressStart;
+  src: url(./fonts/PressStart.ttf);
+}
+
+.toolbar {
+  width: 100vw;
+  height: 50px;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  border-width: 5px;
+
+  display: inline-flex;
+  align-items: center;
+
+  font-size: small;
+  font-weight: 100;
+  font-family: PressStart;
+}
+
+.startBtn {
+  width: 75px;
+  height: 85%;
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-width: 3px;
+}
+.startBtn:hover {
+  border-width: 4px;
+}
+
+.taskbarText {
+  padding: 5px;
+}
+
+.clock {
+  height: 85%;
+  width: 8%;
+  letter-spacing: -1px;
+  position: relative;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-width: 3px;
+}
+
+.clockImg {
+  height: 100%;
+  margin-right: 10px;
+}
+
+.minimizedApplication {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 5px;
+  word-spacing: -5px;
+}
+.minimizedApplication:hover {
+  border-width: 4px;
+}
+#taskApps {
+  height: 85%;
+  display: inline-flex;
+  align-items: center;
+  width: 90%;
+  overflow: hidden;
+}

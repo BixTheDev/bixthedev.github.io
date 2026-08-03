@@ -1,0 +1,30 @@
+.application {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  color: white;
+
+  min-width: 100px;
+  display: grid;
+  place-items: center;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.application:hover {
+  border: 2px dotted grey;
+  box-sizing: border-box;
+}
+
+.application-img {
+  height: 75px;
+  margin: 5px;
+}
+
+.application-name {
+  font-size: 75%;
+}
