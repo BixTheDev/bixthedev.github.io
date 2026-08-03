@@ -1,5 +1,5 @@
 .application {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bolder;
   color: white;
 
@@ -13,6 +13,7 @@
   margin: 10px;
   user-select: none;
   cursor: pointer;
+  word-spacing: -25%;
 }
 
 .application:hover {

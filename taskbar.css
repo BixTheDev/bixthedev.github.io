@@ -40,7 +40,6 @@
 
 .clock {
   height: 85%;
-  width: 8%;
   letter-spacing: -1px;
   position: relative;
   margin-left: auto;
@@ -49,6 +48,7 @@
   justify-content: center;
   padding: 5px;
   border-width: 3px;
+  word-spacing: -50%;
 }
 
 .clockImg {
@@ -63,7 +63,7 @@
   justify-content: center;
 
   margin: 5px;
-  word-spacing: -5px;
+  word-spacing: -50%;
 }
 .minimizedApplication:hover {
   border-width: 4px;
