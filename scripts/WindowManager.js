@@ -55,14 +55,14 @@ function createWindow(title, templateID) {
   console.log(`Creating new Window - ${title} > ${templateID}`);
   const template = document.getElementById(templateID);
   const windowEl = template.content.firstElementChild.cloneNode(true);
-  windowEl.dataset.title = title;
-
-  if (windowExist(title, windowEl.dataset.maxWindows)) {
+  // windowEl.dataset.title = title;
+  console.log(windowEl.dataset.title);
+  if (windowExist(windowEl.dataset.title, windowEl.dataset.maxWindows)) {
     return;
   }
   desktop.appendChild(windowEl);
   makeDraggable(windowEl);
-  const newWin = new OSWindow(title, windowEl);
+  const newWin = new OSWindow(windowEl.dataset.title, windowEl);
   openWindows.push(newWin);
 
   // Add Controls to the exit button
@@ -149,10 +149,17 @@ function makeDraggable(windowElement, isWindow = true) {
 }
 
 setupApps();
-createWindow("Meet The Dev", "MTD.Template");
 
 window.addEventListener("resize", () => {
   openWindows.forEach((window) => {
     window.Close();
   });
 });
+
+const params = new URLSearchParams(window.location.search);
+
+const appName = params.get("app");
+if (appName) {
+  createWindow(appName, `${appName}.Template`);
+}
+// console.log(`Tab Name Set: ${tabName}`)

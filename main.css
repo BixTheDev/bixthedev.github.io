@@ -52,3 +52,11 @@ body {
   flex-wrap: wrap;
   height: 100vh;
 }
+
+/* De-Swarm The Neighborhood CSS */
+.dstn-p {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  margin: 5px;
+  text-align: center;
+}

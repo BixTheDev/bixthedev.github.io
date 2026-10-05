@@ -18,8 +18,6 @@
 <body>
     <div id="Desktop" class="Desktop">
         
-
-
         <div class="application" data-title="Meet The Dev" data-window-Template="MTD.Template">
             <img class="application-img" id="iconImg" src="images/general/bix.png"></img>
             <span id="iconText" class="application-name">Meet The Dev</span>
@@ -33,12 +31,15 @@
             
             <img class="application-img" id="iconImg" src="images/logos/itch-app.png"></img>
             <span id="iconText" class="application-name">Itch.io Page</span>
-            
         </div>
         </a>
         <div class="application" data-title="Flappy Godot" data-window-Template="FlappyGodot.Template">
             <img class="application-img" id="iconImg" src="images/games/FlappyGodotIcon.png"></img>
             <span id="iconText" class="application-name">Flappy Godot</span>
+        </div>
+        <div class="application" data-title="D.S.T.N" data-window-Template="DSTN.Template">
+            <img class="application-img" id="iconImg" src="images/games/DSTN-Icon.png"></img>
+            <span id="iconText" class="application-name">De-Swarm The<br>Neighborhood</span>
         </div>
     </div>
 
@@ -80,7 +81,7 @@
         </div>
     </template>
     <template id="MTD.Template">
-        <div data-max-Windows="1" class="Window panel" style="left: 75%;top: 5%;width: 400px;">
+        <div data-max-Windows="1" data-title="Meet The Dev" class="Window panel" style="left: 75%;top: 5%;width: 400px;">
             <div class="newTab">
 
                 <span id="tabName">Meet The Dev</span>
@@ -100,7 +101,7 @@
         </div>
     </template>
     <template id="Twitch.Template">
-            <div data-max-Windows="1" class="Window panel" style="left: 10%;top: 10%;height: 360px;width: 640px">
+            <div data-max-Windows="1" data-title="Twitch" class="Window panel" style="left: 10%;top: 10%;height: 360px;width: 640px">
                 <div class="newTab">
 
                     <span id="tabName">Twitch.tv/bixthedev</span>
@@ -131,7 +132,7 @@
             </div>
     </template>
     <template id="FlappyGodot.Template">
-            <div data-max-Windows="1" class="Window panel" style="left: 50%;top: 5%;width: 500px;height: 790px;overflow: hidden;">
+            <div data-max-Windows="1" data-title="Flappy Godot" class="Window panel" style="left: 50%;top: 5%;width: 500px;height: 790px;overflow: hidden;">
                 <div class="newTab">
 
                     <span id="tabName">Flappy Godot</span>
@@ -147,10 +148,30 @@
 
             </div>
     </template>
-    <script src="scripts/TaskbarManager.js"></script>
-    <script src="scripts/WindowManager.js"></script>
+    <template id="DSTN.Template">
+        <div data-max-Windows="1" class="Window panel" data-title="D.S.T.N" style="left: 40%;top: 5%;width: 400px;">
+            <div class="newTab">
+
+                <span id="tabName">De-Swarm The Neighborhood</span>
+                <div id="minimizeButton"class="icon panel"><img class="iconSymbols" src="images/system/MinimizeIcon.png"></img></div>
+                <div class="icon panel"><img class="iconSymbols" src="images/system/MaximizeIcon.png"></img></div>
+                <div id="exitButton" class="icon panel"><img class="iconSymbols" src="images/system/ExitIcon.png"></img>
+                </div>
+
+            </div>
+            <div class="WindowContent">
+                <img style="width: 99%;margin-top: 10px;border: 1px black solid;" src="images/gifs/DSTN/DSTN-Dev_Prev.gif"></img>
+                <span class="mtd-span"><b>Steam Page Coming Soon!</b></span>
+                <p class="dstn-p">An evil corporation called Swarm Safety has been going around town installing it's new security system. Most of the town has turned a blind eye to these new cameras, robots and drones. Luckily for you, a few individuals would still like their "activities" to remain private and are willing to pay a pretty penny for it. You and friends take to the night to remove as much of the hardware as you can without getting caught.</p>
+            </div>
+
+        </div>
+    </template>
     <!-- This needs to load prior to opening the twitch system! -->
     <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+    <script src="scripts/TaskbarManager.js"></script>
+    <script src="scripts/WindowManager.js"></script>
+
 </body>
 
 </html>
