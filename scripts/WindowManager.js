@@ -159,7 +159,10 @@ window.addEventListener("resize", () => {
 const params = new URLSearchParams(window.location.search);
 
 const appName = params.get("app");
+appName.split(",").forEach(function (app) {
+  createWindow(app, `${app}.Template`);
+});
+
 if (appName) {
-  createWindow(appName, `${appName}.Template`);
 }
 // console.log(`Tab Name Set: ${tabName}`)
